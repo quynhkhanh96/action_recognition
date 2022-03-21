@@ -29,11 +29,11 @@ def evaluate_video_recognizer(model, test_dataset, device):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Inference and evaluate recognizer')
-    parser.add_argument(
-        "--cfg_path",
-        type=str,
-        help="mmaction2 config path",
-    )
+    # parser.add_argument(
+    #     "--cfg_path",
+    #     type=str,
+    #     help="mmaction2 config path",
+    # )
     parser.add_argument(
         "--epoch",
         type=int,
@@ -41,7 +41,8 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
 
-    cfg = Config.fromfile(args.cfg_path)
+    # cfg = Config.fromfile(args.cfg_path)
+    cfg = Config.fromfile('configs/ucf101_rgb_tsm_k400_pretrained_r50_1x1x8.py')
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
