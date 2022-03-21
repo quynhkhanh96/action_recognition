@@ -12,8 +12,8 @@ MMACTION="/ext_data2/comvis/khanhdtq/mmaction2"
 DATA_DIR="${MMACTION}/data/ucf101/rawframes"
 WORK_DIR="/ext_data2/comvis/khanhdtq/ucf101_tsm"
 SPLIT=1
-ANN_FILE_TRAIN = "${MMACTION}/data/ucf101/ucf101_train_split_${SPLIT}_rawframes.txt"
-ANN_FILE_VAL = "${MMACTION}/data/ucf101/ucf101_val_split_${SPLIT}_rawframes.txt"
+ANN_FILE_TRAIN="${MMACTION}/data/ucf101/ucf101_train_split_${SPLIT}_rawframes.txt"
+ANN_FILE_VAL="${MMACTION}/data/ucf101/ucf101_val_split_${SPLIT}_rawframes.txt"
 ```
 
 Train model:

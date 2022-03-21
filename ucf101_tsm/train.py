@@ -58,7 +58,9 @@ if __name__ == '__main__':
     cfg.data.train.ann_file = args.ann_file_train
     cfg.data.val.ann_file = args.ann_file_val 
     cfg.seed = int(args.seed)
-    cfg.gpu_ids = range(1) #TODO
+    # cfg.gpu_ids = range(1) #TODO
+    num_gpus = torch.cuda.device_count()
+    cfg.gpu_ids = range(num_gpus)
     # model
     model = build_model(
         cfg.model,
@@ -68,7 +70,10 @@ if __name__ == '__main__':
     # datasets
     datasets = [build_dataset(cfg.data.train)]
 
-    train_model(model, datasets, cfg, distributed=False, validate=False)
+    distributed = False 
+    if num_gpus > 1:
+        distributed = True 
+    train_model(model, datasets, cfg, distributed=distributed, validate=False)
 
     
 
