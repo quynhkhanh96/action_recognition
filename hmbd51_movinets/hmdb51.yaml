@@ -1,0 +1,11 @@
+epochs: 30
+device: 'cuda' 
+batch_size: 16 
+fold: 1
+num_frames: 64 
+frame_rate: 5
+clip_steps: 2
+model: 'MoViNet'
+optimizer: 'Adam'
+lr: 0.00005 
+seed: 1234 
