@@ -46,6 +46,12 @@ if __name__ == '__main__':
         type=str,
         help="Path to val annotation file",
     )
+    parser.add_argument(
+        "--videos_per_gpu",
+        type=int,
+        default=10,
+        help="Number of videos per gpu",
+    )
     parser.add_argument('--seed', type=int, default=42, help='random seed')
     args = parser.parse_args()
 
@@ -71,8 +77,10 @@ if __name__ == '__main__':
     datasets = [build_dataset(cfg.data.train)]
 
     distributed = False 
-    if num_gpus > 1:
-        distributed = True 
+    cfg.data.videos_per_gpu = args.videos_per_gpu
+    # if num_gpus > 1:
+    #     distributed = True 
+    #     cfg.data.videos_per_gpu = 10 
     train_model(model, datasets, cfg, distributed=distributed, validate=False)
 
     
