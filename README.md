@@ -1,5 +1,5 @@
 Centralized action recognition model training, experiments are conducted on standard machines like RTX 2080Ti or embedded devices like Jetson Nano.
-
+Models are only trained on single GPU (hence `videos_per_gpu` is reduced to be able to fit in).
 ## HMDB51
 
 ## UCF101 
