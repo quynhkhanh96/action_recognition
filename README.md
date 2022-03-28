@@ -30,5 +30,11 @@ Restructure the dataset so we can use mmaction2's build rawframes script:
 ```shell
 python prepare_data.py --data_root "/ext_data2/comvis/datasets/afors2022" --output_dir "/ext_data2/comvis/khanhdtq/mmaction2/data/afors/videos"
 ```
-
+Build rawframes:
+```shell 
+MMACTION="/ext_data2/comvis/khanhdtq/mmaction2"
+cd $MMACTION/tools/data 
+python build_rawframes.py ../../data/afors/videos/ ../../data/afors/rawframes/ --task rgb --level 2 --ext mp4 --use-opencv
+echo "Genearte raw frames (RGB only)"
+```
 
