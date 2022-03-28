@@ -25,5 +25,10 @@ Run inference and evaluate recognizer:
 ```shell
 CUDA_VISIBLE_DEVICES=3 python -m inference --epoch=100
 ```
+### AFORS
+Restructure the dataset so we can use mmaction2's build rawframes script:
+```shell
+python prepare_data.py --data_root "/ext_data2/comvis/datasets/afors2022" --output_dir "/ext_data2/comvis/khanhdtq/mmaction2/data/afors/videos"
+```
 
 
