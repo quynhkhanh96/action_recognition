@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
     NUM_CLASSES = 12 
     all_files = glob.glob(args.data_root + '/data/*/*/*.mp4')
-    class2path = {f'i:02d': [] for i in range(1, NUM_CLASSES + 1)}
+    class2path = {f'{i:02d}': [] for i in range(1, NUM_CLASSES + 1)}
     for fpath in all_files:
         fname = fpath.split('/')[-1].split('.')[0]
         class2path[fname].append(fpath)
