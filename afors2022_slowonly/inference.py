@@ -30,6 +30,11 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Inference and evaluate recognizer')
     parser.add_argument(
+        "--work_dir",
+        type=str,
+        help="working dir path",
+    )
+    parser.add_argument(
         "--epoch",
         type=int,
         help="epoch to run inference",
@@ -41,7 +46,7 @@ if __name__ == '__main__':
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Load trained model 
-    ckpt_path = cfg.work_dir + f'/epoch_{args.epoch}.pth'
+    ckpt_path = args.work_dir + f'/epoch_{args.epoch}.pth'
     cfg.model.backbone.pretrained = None
     model = build_recognizer(cfg.model, test_cfg=cfg.get('test_cfg'))
     load_checkpoint(model, ckpt_path, map_location='cpu')
