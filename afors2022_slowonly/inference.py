@@ -35,6 +35,16 @@ if __name__ == '__main__':
         help="working dir path",
     )
     parser.add_argument(
+        "--data_root_val",
+        type=str,
+        help="Where val rawframes are stored",
+    )
+    parser.add_argument(
+        "--ann_file_val",
+        type=str,
+        help="Path to val annotation file",
+    )
+    parser.add_argument(
         "--epoch",
         type=int,
         help="epoch to run inference",

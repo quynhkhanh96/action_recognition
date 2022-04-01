@@ -56,7 +56,7 @@ CUDA_VISIBLE_DEVICES=0 python -m train --data_root=$DATA_DIR --data_root_val=$DA
 ```
 Evaluate model:
 ```shell 
-CUDA_VISIBLE_DEVICES=3 python -m inference --work_dir=$WORK_DIR --epoch=30
+CUDA_VISIBLE_DEVICES=3 python -m inference --work_dir=$WORK_DIR --data_root_val=$DATA_DIR --ann_file_val=$ANN_FILE_VAL --epoch=30
 ```
 
 ## Quick TODO
