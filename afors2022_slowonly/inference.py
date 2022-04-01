@@ -41,7 +41,6 @@ if __name__ == '__main__':
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Load trained model 
-    cfg = Config.fromfile(args.cfg_path)
     ckpt_path = cfg.work_dir + f'/epoch_{args.epoch}.pth'
     cfg.model.backbone.pretrained = None
     model = build_recognizer(cfg.model, test_cfg=cfg.get('test_cfg'))
