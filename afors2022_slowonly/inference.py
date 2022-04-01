@@ -42,6 +42,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     cfg = Config.fromfile('configs/afors_rgb_k400_pretrained.py')
+    cfg.omnisource = False 
+    # update config's paths according to args
+    cfg.data.val.data_prefix = args.data_root_val
+    cfg.work_dir = args.work_dir 
+    cfg.data.val.ann_file = args.ann_file_val 
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
