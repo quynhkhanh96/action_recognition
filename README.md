@@ -59,3 +59,5 @@ Evaluate model:
 CUDA_VISIBLE_DEVICES=3 python -m inference --epoch=30
 ```
 
+## Quick TODO
+- [ ] Add WandB logging 
