@@ -35,6 +35,10 @@ Build rawframes:
 MMACTION="/ext_data2/comvis/khanhdtq/mmaction2"
 cd $MMACTION/tools/data 
 python build_rawframes.py ../../data/afors/videos/ ../../data/afors/rawframes/ --task rgb --level 2 --ext mp4 --use-opencv
-echo "Genearte raw frames (RGB only)"
 ```
-
+Copy `train.txt` and `val.txt` in `afors2022` directory to `$MMACTION/data/afors/annotations` then run this to build file list:
+```shell 
+cd ../..
+PYTHONPATH=. python tools/data/build_file_list.py afors data/afors/rawframes/ --num-split 1 --level 2 --subset train --format rawframes --shuffle
+PYTHONPATH=. python tools/data/build_file_list.py afors data/afors/rawframes/ --num-split 1 --level 2 --subset val --format rawframes --shuffle
+```
