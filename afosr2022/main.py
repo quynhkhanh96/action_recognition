@@ -236,10 +236,10 @@ def main():
 		# model.module.load_state_dict(checkpoint['state_dict'])
 		model.load_state_dict(checkpoint['state_dict'])
 
-	if args.job=='evaluate':
+	if args.job == 'evaluate':
 		print("Evaluate top 10 with confusion matrix")			
-		top1, top5, top10, infTime = testWithConfusionMatrix(model,test_loader,num_classes,device)
-		print('top1: %.3f top5: %.3f top10: %.3f' % (top1,top5, top10))
+		top1, top5, top10, infTime = testWithConfusionMatrix(model, test_loader, num_classes, device)
+		print('top1: %.3f top5: %.3f top10: %.3f' % (top1, top5, top10))
 		print("Average inference time: %6.3f" % (infTime))
 		return		
 
@@ -255,7 +255,7 @@ def main():
 
 		if args.stepsize > 0: scheduler.step()	
 
-		if args.eval_step > 0 and (epoch+1) % args.eval_step == 0 or (epoch+1) == args.max_epoch:
+		if args.eval_step > 0 and (epoch + 1) % args.eval_step == 0 or (epoch + 1) == args.max_epoch:
 			print("==> Test")			
 			rank1 = test(model, test_loader, device) # Must do not testing when training
 			print('acc:%f' % (rank1))	
@@ -347,6 +347,6 @@ def testWithConfusionMatrix(model,testLoader,nb_classes,device):
 	class_name = ['1', '2 ', '3', '4','5', '6', '7', '8', '9', '10', '11', '12']		
 	plot_confusion_matrix(cm, class_names=class_name, save_file=os.path.join(args.save_dir,"confusion.pdf"), fmt='.2f')
 	return top1.avg, top5.avg, top10.avg, infTime.avg
-    
+
 if __name__ == '__main__':
 	main()
