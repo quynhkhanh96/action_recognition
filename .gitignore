@@ -48,3 +48,5 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+afors2022/pre-trained/*
+afors2022/log/* 
