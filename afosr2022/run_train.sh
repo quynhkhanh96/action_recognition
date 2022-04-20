@@ -53,12 +53,12 @@ elif [ "$model" = "resnet503d" ]; then
 elif [ "$model" = "resnet183d" ]; then
 	python3 main.py --job train -a $model --dataset-dir $data --train-annotation-file $trlist \
 	--test-annotation-file $telist --height 224 --width 224 --dataset $dataset --train-batch 4 \
-	--max-epoch 30 --eval-step 10 --print-freq 5 --save-dir $saveDir -seq-len 16 \
+	--max-epoch 30 --eval-step 10 --print-freq 5 --save-dir $saveDir --seq-len 16 \
 	--pretrained-model=./pre-trained/resnet-18-kinetics.pth 
 elif [ "${model:0:7}" = "movinet" ]; then
 	python3 main.py --job train -a $model --dataset-dir $data --train-annotation-file $trlist \
 	--test-annotation-file $telist --height 172 --width 172 --dataset $dataset --train-batch 4 \
-	--max-epoch 30 --eval-step 10 --print-freq 5 --save-dir $saveDir -seq-len 16
+	--max-epoch 30 --eval-step 10 --print-freq 5 --save-dir $saveDir --seq-len 16
 elif [ "$model" = "efficientnet3d" ]; then
 	python3 main.py --job train -a $model --dataset-dir $data --train-annotation-file $trlist \
 	--test-annotation-file $telist --height 224 --width 224 --dataset $dataset --train-batch 4 \
