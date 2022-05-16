@@ -115,22 +115,22 @@ def main():
 		])  	
 
 	if args.dataset == "afosr":
-		from datasets.afosr import AFOSRVideoDataset
-		train_set = AFOSRVideoDataset(
-			video_dir=args.dataset_dir,
-			annotation_file_path=args.train_annotation_file,
-			sampler=RandomTemporalSegmentSampler(n_frames=args.seq_len),
-			# sampler=SystematicSampler(n_frames=16),
-			transform=transform,
-			use_albumentations=False,
-		)
-		test_set = AFOSRVideoDataset(
-			video_dir=args.dataset_dir,
-			annotation_file_path=args.test_annotation_file,
-			sampler=SystematicSampler(n_frames=args.seq_len),
-			transform=transform,
-			use_albumentations=False,
-		)
+		# from datasets.afosr import AFOSRVideoDataset
+		# train_set = AFOSRVideoDataset(
+		# 	video_dir=args.dataset_dir,
+		# 	annotation_file_path=args.train_annotation_file,
+		# 	sampler=RandomTemporalSegmentSampler(n_frames=args.seq_len),
+		# 	# sampler=SystematicSampler(n_frames=16),
+		# 	transform=transform,
+		# 	use_albumentations=False,
+		# )
+		# test_set = AFOSRVideoDataset(
+		# 	video_dir=args.dataset_dir,
+		# 	annotation_file_path=args.test_annotation_file,
+		# 	sampler=SystematicSampler(n_frames=args.seq_len),
+		# 	transform=transform,
+		# 	use_albumentations=False,
+		# )
 
 		from datasets.afosr import AFOSRFrameDataset
 		train_set = AFOSRFrameDataset(
