@@ -20,9 +20,12 @@ case "$hostname" in
 		source ~/pytorch_env/bin/activate
     	;;
   	"hungvuong")
-    	data=/ext_data2/comvis/datasets/afors2022/data
-    	trlist=/ext_data2/comvis/datasets/afors2022/train.txt
-    	telist=/ext_data2/comvis/datasets/afors2022/val.txt
+    	# data=/ext_data2/comvis/datasets/afors2022/data
+		data=/ext_data2/comvis/khanhdtq/afosr2022/rgb_frames
+    	# trlist=/ext_data2/comvis/datasets/afors2022/train.txt
+		trlist=/ext_data2/comvis/khanhdtq/afosr2022/train.txt
+    	# telist=/ext_data2/comvis/datasets/afors2022/val.txt
+		telist=/ext_data2/comvis/khanhdtq/afosr2022/val.txt 
     	export CUDA_VISIBLE_DEVICES="0"
     	;;
 	*)
@@ -30,7 +33,7 @@ case "$hostname" in
  		;;
 esac
  
-model="movinet_a0" 	# resnet183d resnet503d c3d_bn movinet_a0 movinet_a2 efficientnet3d mobilenet3d_v2 mobilenet3d_v2_0.45x
+model="resnet183d" 	# resnet183d resnet503d c3d_bn movinet_a0 movinet_a2 efficientnet3d mobilenet3d_v2 mobilenet3d_v2_0.45x
 widthMult=0.45 # using with mobilenet
 saveDir="./log/$dataset/$model"		
 echo $saveDir

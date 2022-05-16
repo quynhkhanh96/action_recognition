@@ -132,6 +132,24 @@ def main():
 			use_albumentations=False,
 		)
 
+		from datasets.afosr import AFOSRFrameDataset
+		train_set = AFOSRFrameDataset(
+			frame_dir=args.dataset_dir,
+			annotation_file_path=args.train_annotation_file,
+			n_frames=args.seq_len,
+			mode='train',
+			transform=transform,
+			use_albumentations=False,
+		)
+		test_set = AFOSRFrameDataset(
+			frame_dir=args.dataset_dir,
+			annotation_file_path=args.test_annotation_file,
+			n_frames=args.seq_len,
+			mode='test',
+			transform=transform,
+			use_albumentations=False,			
+		)
+
 	print(f'[Preparing dataset] n_train_instances = {len(train_set)}, n_test_instances = {len(test_set)}')
 
 	class_names = np.unique(train_set.labels).astype(str).tolist()
