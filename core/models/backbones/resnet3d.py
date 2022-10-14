@@ -309,8 +309,6 @@ class Bottleneck3d(nn.Module):
 
         return out
 
-
-@BACKBONES.register_module()
 class ResNet3d(nn.Module):
     """ResNet 3d backbone.
     Args:
