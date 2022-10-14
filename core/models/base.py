@@ -4,7 +4,8 @@ import torch.nn.functional as F
 
 class Recognizer3D(nn.Module):
     def __init__(self, backbone, neck=None, cls_head=None):
-        super().__init__()        
+        super().__init__()  
+        self.backbone_from = 'mmaction2'      
         self.backbone = backbone
         if neck is not None:
             self.neck = neck
