@@ -844,8 +844,6 @@ class ResNet3d(nn.Module):
                 if isinstance(m, _BatchNorm):
                     m.eval()
 
-
-@BACKBONES.register_module()
 class ResNet3dLayer(nn.Module):
     """ResNet 3d Layer.
     Args:
