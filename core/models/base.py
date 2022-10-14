@@ -3,10 +3,11 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class Recognizer3D(nn.Module):
-    def __init__(self, backbone, cls_head=None):
+    def __init__(self, backbone, neck=None, cls_head=None):
         super().__init__()        
         self.backbone = backbone
-
+        if neck is not None:
+            self.neck = neck
         self.cls_head = cls_head if cls_head else None
         # max_testing_views should be int
         self.max_testing_views = None
@@ -17,6 +18,10 @@ class Recognizer3D(nn.Module):
         self.init_weights()
         self.fp16_enabled = False
 
+    @property
+    def with_neck(self):
+        """bool: whether the recognizer has a neck"""
+        return hasattr(self, 'neck') and self.neck is not None
 
     @property
     def with_cls_head(self):
