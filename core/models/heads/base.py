@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from abc import ABCMeta, abstractmethod
 
 class AvgConsensus(nn.Module):
     """Average consensus module.
@@ -15,7 +16,6 @@ class AvgConsensus(nn.Module):
     def forward(self, x):
         """Defines the computation performed at every call."""
         return x.mean(dim=self.dim, keepdim=True)
-
 
 class BaseHead(nn.Module, metaclass=ABCMeta):
     """Base class for head.
