@@ -44,7 +44,7 @@ if __name__ == '__main__':
             os.makedirs(action_dir, exist_ok=True)
             # Need to check: One subject performs a action exactly one time?
             for subject in range(1, NUM_SUBJECTS+1):
-                df_frames = df_cls[df_cls['subject'] == f'Subject{subject}']
+                df_frames = df_cls[df_cls['subject'] == 'Subject' + str(subject).zfill(2)]
                 if len(df_frames):
                     # frames
                     frames = df_frames['frame'].tolist()
@@ -65,4 +65,4 @@ if __name__ == '__main__':
                         f.write(f'action_{cls}/video_name {num_frames} {cls}\n')
                 if subject % 10 == 0:
                     print(f'\tLoading {subject}/{NUM_SUBJECTS}...')
-        print(f'Done with action {cls}.')
+            print(f'Done with action {cls}.')
