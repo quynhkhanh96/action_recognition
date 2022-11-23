@@ -55,7 +55,7 @@ Convert the original data to mmaction format:
     ```
 Run the following:
 ```shell
-python prepare_data.py --image_dir=$IMAGE_DIR --annotation_dir=$ANN_DIR ----new_data_dir=$DATA_DIR
+python prepare_data.py --image_dir=$IMAGE_DIR --annotation_dir=$ANN_DIR --new_data_dir=$DATA_DIR
 ```
 # **Experiments**
 
