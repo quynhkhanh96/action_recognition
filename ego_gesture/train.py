@@ -1,5 +1,6 @@
 # Refer: https://download.openmmlab.com/mmaction/recognition/slowonly/slowonly_k400_pretrained_r50_8x4x1_40e_hmdb51_rgb/20210606_010153.log
-import os
+import sys, os
+sys.path.insert(0, os.path.abspath('..'))
 import random
 import torch
 import torch.nn as nn
