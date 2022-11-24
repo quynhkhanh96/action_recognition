@@ -36,12 +36,12 @@ Convert the original data to mmaction format:
     rawframes
     ├── action_1
     │   ├── Subject03_Scene1_rgb1_0
-    │   │   ├── 00001.jpg
-    │   │   ├── 00002.jpg
+    │   │   ├── img_00001.jpg
+    │   │   ├── img_00002.jpg
     │   │   └── ...
     │   ├── Subject04_Scene1_rgb1_0
-    │   │   ├── 00001.jpg
-    │   │   ├── 00002.jpg
+    │   │   ├── img_00001.jpg
+    │   │   ├── img_00002.jpg
     │   │   └── ...
     │   └── Subject04_Scene1_rgb1_0
     ├── action_2

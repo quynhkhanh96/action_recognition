@@ -58,11 +58,11 @@ if __name__ == '__main__':
                     for i, frame in enumerate(frames):
                         frame_name = frame.split('/')[-1]
                         shutil.copy(os.path.join(args.image_dir, frame), 
-                                os.path.join(video_dir, str(i+1).zfill(5) + '.jpg'))
+                                os.path.join(video_dir, 'img_' + str(i+1).zfill(5) + '.jpg'))
                     
                     num_frames = len(frames)
                     with open(os.path.join(args.new_data_dir, f'{mode}.txt'), 'a') as f:
-                        f.write(f'action_{cls}/video_name {num_frames} {cls}\n')
+                        f.write(f'action_{cls}/{video_name} {num_frames} {cls}\n')
                 if subject % 10 == 0:
                     print(f'\tLoading {subject}/{NUM_SUBJECTS}...')
             print(f'Done with action {cls}.')
