@@ -49,15 +49,8 @@ if __name__ == '__main__':
     model, parameters = generate_model(opt)
     print(model)
 
-    # Egogesture, with "no-gesture" training, weighted loss
-    # class_weights = torch.cat((0.012*torch.ones([1, 83]), 0.00015*torch.ones([1, 1])), 1)
     criterion = nn.CrossEntropyLoss()
 
-    # # nvgesture, with "no-gesture" training, weighted loss
-    # class_weights = torch.cat((0.04*torch.ones([1, 25]), 0.0008*torch.ones([1, 1])), 1)
-    # criterion = nn.CrossEntropyLoss(weight=class_weights, size_average=False)
-
-    # criterion = nn.CrossEntropyLoss()
     if not opt.no_cuda:
         criterion = criterion.cuda()
 
@@ -148,10 +141,8 @@ if __name__ == '__main__':
         opt.begin_epoch = checkpoint['epoch']
         model.load_state_dict(checkpoint['state_dict'])
 
-
     print('run')
     for i in range(opt.begin_epoch, opt.n_epochs + 1):
-    # for i in range(opt.begin_epoch, opt.begin_epoch + 10):
         if not opt.no_train:
             adjust_learning_rate(optimizer, i, opt)
             train_epoch(i, train_loader, model, criterion, optimizer, opt,
