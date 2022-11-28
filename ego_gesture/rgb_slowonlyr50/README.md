@@ -63,3 +63,4 @@ Run this to train the model:
 python train.py --data_dir=$DATA_DIR --work_dir=$DATA_DIR/cent_exps
 ```
 # **Results**
+Top1 accuracy = 81.4%, Top5 accuracy = 96.7%

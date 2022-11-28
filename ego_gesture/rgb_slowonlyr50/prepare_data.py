@@ -62,7 +62,7 @@ if __name__ == '__main__':
                     
                     num_frames = len(frames)
                     with open(os.path.join(args.new_data_dir, f'{mode}.txt'), 'a') as f:
-                        f.write(f'action_{cls}/{video_name} {num_frames} {cls}\n')
+                        f.write(f'action_{cls}/{video_name} {num_frames} {cls-1}\n')
                 if subject % 10 == 0:
                     print(f'\tLoading {subject}/{NUM_SUBJECTS}...')
             print(f'Done with action {cls}.')
