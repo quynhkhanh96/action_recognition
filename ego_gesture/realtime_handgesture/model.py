@@ -127,7 +127,7 @@ def generate_model(opt):
 
     if not opt.no_cuda:
         model = model.cuda()
-        model = nn.DataParallel(model, device_ids=None)
+        # model = nn.DataParallel(model, device_ids=None)
         pytorch_total_params = sum(p.numel() for p in model.parameters() if
                                p.requires_grad)
         print("Total number of trainable parameters: ", pytorch_total_params)
