@@ -58,9 +58,9 @@ Run the following:
 python prepare_data.py --image_dir=$IMAGE_DIR --annotation_dir=$ANN_DIR --new_data_dir=$DATA_DIR
 ```
 # **Experiments**
-Run this to train the model:
+Run SlowFastR50:
 ```shell
-python train.py --data_dir=$DATA_DIR --work_dir=$DATA_DIR/cent_exps
+python main.py --data_dir=$DATA_DIR --work_dir=$DATA_DIR/cent_exps --cfg_path="configs/egogesture_slowfastr50.yaml"
 ```
 # **Results**
 Top1 accuracy = 81.4%, Top5 accuracy = 96.7%
