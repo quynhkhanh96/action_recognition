@@ -22,7 +22,7 @@ import argparse
 from mmaction.core.evaluation import top_k_accuracy
 
 def train(train_loader, val_loader, model, criterion, optimizer, cfgs):
-
+    model.to('cuda')
     for epoch in range(cfgs.begin_epoch, cfgs.n_epochs + 1):
         print(f'*************** Epoch {epoch} ***************')
         # === train this epoch ===
