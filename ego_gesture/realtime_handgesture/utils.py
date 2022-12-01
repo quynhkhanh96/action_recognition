@@ -4,6 +4,11 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, class
 import shutil
 import numpy as np
 
+class Dict2Class(object):
+    def __init__(self, my_dict):
+        for key in my_dict:
+            setattr(self, key, my_dict[key])
+
 class AverageMeter(object):
     """Computes and stores the average and current value"""
 

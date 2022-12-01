@@ -23,6 +23,10 @@ Start by looking at `opts.py`, our `root_path` will be `path/to/realtime_EgoGest
 Also download the pretrained models from [here](https://drive.google.com/file/d/11MJWXmFnx9shbVtsaP1V8ak_kADg0r7D/view)
 # **Experiments**
 ```shell
+python simple_main.py --root_path $ROOT_PATH --video_path $ROOT_PATH/images --annotation_path $ROOT_PATH/annotation_EgoGesture --result_path $ROOT_PATH/cent_exps --cfg_path "configs/egogesture_resnext101.yaml"
+```
+
+```shell
 bash scripts/run_train.sh $ROOT_PATH $PRETRAINED_PATH/jester_resnext_101_RGB_32.pth resnext 1.0
 ```
 # **Results**

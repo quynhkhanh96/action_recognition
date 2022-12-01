@@ -18,7 +18,6 @@ from dataset import get_training_set, get_validation_set, get_test_set
 from utils import *
 from train import train_epoch
 from validation import val_epoch
-import test
 
 if __name__ == '__main__':
     opt = parse_opts()

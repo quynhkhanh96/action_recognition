@@ -1,0 +1,48 @@
+store_name: 'model'
+modality: 'RGB'
+pretrain_modality: 'RGB'
+dataset: 'egogesture'
+n_classes: 83
+n_finetune_classes: -1
+sample_size: 112 # Height and width of inputs
+sample_duration: 32 # Temporal duration of inputs
+downsample: 1 # Downsampling. Selecting 1 frame out of N
+initial_scale: 1.0 # Initial scale for multiscale cropping
+n_scales: 5 # Number of scales for multiscale cropping
+scale_step: 0.84089641525 # Scale step for multiscale cropping
+train_crop: 'random' # Spatial cropping method in training. random is uniform. corner is selection from 4 corners and 1 center
+learning_rate: 0.01 # Initial learning rate (divided by 10 while training by lr scheduler
+lr_steps: [15, 25, 35, 45, 60, 50, 200, 250] # epochs to decay learning rate by 10
+momentum: 0.9
+dampening: 0.9
+weight_decay: 1e-3
+no_mean_norm: False
+std_norm: False
+nesterov: False
+optimizer: 'sgd'
+lr_patience: 10
+batch_size: 16
+n_epochs: 60
+begin_epoch: 1
+n_val_samples: 3
+resume_path: ''
+pretrain_path: ''
+ft_portion: 'complete' # The portion of the model to apply fine tuning, either complete or last_layer
+test_subset: 'val' # Used subset in test (val | test)
+scale_in_test: 1.0 # Spatial scale in test
+crop_position_in_test: 'c' # Cropping method (c | tl | tr | bl | br)
+no_softmax_in_test: False # If true, output for each clip is not normalized using softmax
+no_cuda: False
+n_threads: 16
+no_hflip: False
+norm_value: 1 # If 1, range of inputs is [0-255]. If 255, range of inputs is [0-1]
+model: 'resnet' # resnet | preresnet | wideresnet | resnext | densenet 
+version: 1.1
+model_depth: 101 # Depth of resnet (10 | 18 | 34 | 50 | 101)
+resnet_shortcut: 'B' # Shortcut type of resnet (A | B)
+wide_resnet_k: 2
+resnext_cardinality: 32
+groups: 3 # The number of groups at group convolutions at conv layers
+width_mult: 1.0 # The applied width multiplier to scale number of filters
+manual_seed: 1
+train_validate: False

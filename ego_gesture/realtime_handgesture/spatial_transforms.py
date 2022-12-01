@@ -368,13 +368,6 @@ class MultiScaleRandomCrop(object):
         self.tl_x = random.random()
         self.tl_y = random.random()
 
-
-
-
-
-
-
-
 class SpatialElasticDisplacement(object):
 
     def __init__(self, sigma=3.0, alpha=1.0, order=3, cval=0, mode="constant"):
