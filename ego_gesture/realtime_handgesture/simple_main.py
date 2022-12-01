@@ -1,4 +1,5 @@
 import os
+os.environ[“CUDA_VISIBLE_DEVICES”] = "1"
 import sys
 import json
 import numpy as np
@@ -142,7 +143,7 @@ if __name__ == '__main__':
     # loss function
     criterion = nn.CrossEntropyLoss()
     if not cfgs.no_cuda:
-        criterion = criterion.cuda()
+        criterion = criterion.to('cuda')
 
     # data loaders
     if cfgs.no_mean_norm and not cfgs.std_norm:
