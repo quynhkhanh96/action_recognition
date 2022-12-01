@@ -126,7 +126,7 @@ def generate_model(opt):
                 sample_duration=opt.sample_duration)
 
     if not opt.no_cuda:
-        model = model.cuda()
+        model = model.to('cuda')
         # model = nn.DataParallel(model, device_ids=None)
         pytorch_total_params = sum(p.numel() for p in model.parameters() if
                                p.requires_grad)
