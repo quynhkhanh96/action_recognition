@@ -26,7 +26,7 @@ def train(train_loader, val_loader, model, criterion, optimizer, cfgs):
         print(f'*************** Epoch {epoch} ***************')
         # === train this epoch ===
         ## adjust the learning rate
-        adjust_learning_rate(optimizer, i, cfgs)
+        adjust_learning_rate(optimizer, epoch, cfgs)
         model.train()
         losses = AverageMeter()
         for i, (inputs, targets) in enumerate(train_loader):
