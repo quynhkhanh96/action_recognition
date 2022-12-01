@@ -47,7 +47,7 @@ def train(train_loader, val_loader, model, criterion, optimizer, cfgs):
         # === validate this epoch ===
         model.eval()
         results, labels = [], []
-        for _, (val_inputs, val_targets) in enumerate(val_loader):
+        for idx, (val_inputs, val_targets) in enumerate(val_loader):
             val_inputs, val_targets = Variable(val_inputs).to('cuda'), Variable(val_targets).to('cuda')
             
             with torch.no_grad():
@@ -55,6 +55,8 @@ def train(train_loader, val_loader, model, criterion, optimizer, cfgs):
 
             results.extend(val_outputs.cpu().numpy())
             labels.extend(val_targets.cpu().numpy())
+            if (idx+1) % 50 == 0:
+                print(f'Done {idx+1} val batches.')
 
         top1_acc, top5_acc = top_k_accuracy(results, labels, topk=(1, 5))
         msg = f'[INFO]Epoch {epoch}: Top1 accuracy = {top1_acc:.3f}, Top5 accuracy = {top5_acc:.3f}\n'
@@ -189,7 +191,7 @@ if __name__ == '__main__':
         cfgs, spatial_transform, temporal_transform, target_transform)
     val_loader = torch.utils.data.DataLoader(
         validation_data,
-        batch_size=8,
+        batch_size=16,
         shuffle=False,
         num_workers=cfgs.n_threads,
         pin_memory=True)

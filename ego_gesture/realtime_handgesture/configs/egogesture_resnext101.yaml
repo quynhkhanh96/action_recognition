@@ -24,7 +24,7 @@ lr_patience: 10
 batch_size: 16
 n_epochs: 60
 begin_epoch: 1
-n_val_samples: 3
+n_val_samples: 1
 resume_path: ''
 pretrain_path: ''
 ft_portion: 'complete' # The portion of the model to apply fine tuning, either complete or last_layer
