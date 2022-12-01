@@ -46,3 +46,4 @@ groups: 3 # The number of groups at group convolutions at conv layers
 width_mult: 1.0 # The applied width multiplier to scale number of filters
 manual_seed: 1
 train_validate: False
+mean_dataset: 'activitynet'

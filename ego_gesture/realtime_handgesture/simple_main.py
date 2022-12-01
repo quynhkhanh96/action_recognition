@@ -81,10 +81,10 @@ if __name__ == '__main__':
         "--result_path",
         type=str
     )
-    parser.add_argument(
-        "--pretrain_path",
-        type=str
-    )
+    # parser.add_argument(
+    #     "--pretrain_path",
+    #     type=str
+    # )
     parser.add_argument(
         "--cfg_path",
         type=str
