@@ -99,6 +99,33 @@ if __name__ == '__main__':
     cfgs.annotation_path = args.annotation_path
     cfgs.result_path = args.result_path
     
+    cfgs.n_classes = int(cfgs.n_classes)
+    cfgs.n_finetune_classes = int(cfgs.n_finetune_classes)
+    cfgs.sample_size = int(cfgs.sample_size)
+    cfgs.sample_duration = int(cfgs.sample_duration)
+    cfgs.downsample = int(cfgs.downsample)
+    cfgs.initial_scale = float(cfgs.initial_scale)
+    cfgs.n_scales = int(cfgs.n_scales)
+    cfgs.scale_step = float(cfgs.scale_step)
+    cfgs.learning_rate = float(cfgs.learning_rate)
+    cfgs.momentum = float(cfgs.momentum)
+    cfgs.dampening = float(cfgs.dampening)
+    cfgs.weight_decay = float(cfgs.weight_decay)
+    cfgs.lr_patience = int(cfgs.lr_patience)
+    cfgs.batch_size = int(cfgs.batch_size)
+    cfgs.n_epochs = int(cfgs.n_epochs)
+    cfgs.begin_epoch = int(cfgs.begin_epoch)
+    cfgs.n_val_samples = int(cfgs.n_val_samples)
+    cfgs.scale_in_test = float(cfgs.scale_in_test)
+    cfgs.n_threads = int(cfgs.n_threads)
+    cfgs.norm_value = int(cfgs.norm_value)
+    cfgs.version = float(cfgs.version)
+    cfgs.model_depth = float(cfgs.model_depth)
+    cfgs.wide_resnet_k = int(cfgs.wide_resnet_k)
+    cfgs.resnext_cardinality = int(cfgs.resnext_cardinality)
+    cfgs.groups = int(cfgs.groups)
+    cfgs.width_mult = float(cfgs.width_mult)
+
     cfgs.scales = [cfgs.initial_scale]
     for i in range(1, cfgs.n_scales):
         cfgs.scales.append(cfgs.scales[-1] * cfgs.scale_step)

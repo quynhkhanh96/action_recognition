@@ -3,7 +3,7 @@ modality: 'RGB'
 pretrain_modality: 'RGB'
 dataset: 'egogesture'
 n_classes: 83
-n_finetune_classes: -1
+n_finetune_classes: 83
 sample_size: 112 # Height and width of inputs
 sample_duration: 32 # Temporal duration of inputs
 downsample: 1 # Downsampling. Selecting 1 frame out of N
@@ -15,7 +15,7 @@ learning_rate: 0.01 # Initial learning rate (divided by 10 while training by lr 
 lr_steps: [15, 25, 35, 45, 60, 50, 200, 250] # epochs to decay learning rate by 10
 momentum: 0.9
 dampening: 0.9
-weight_decay: 1e-3
+weight_decay: 0.0001
 no_mean_norm: False
 std_norm: False
 nesterov: False
