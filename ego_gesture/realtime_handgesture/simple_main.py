@@ -30,8 +30,7 @@ def train(train_loader, val_loader, model, criterion, optimizer, cfgs):
         model.train()
         losses = AverageMeter()
         for i, (inputs, targets) in enumerate(train_loader):
-            inputs, targets = inputs.cuda(), targets.cuda()
-            inputs, targets = Variable(inputs), Variable(targets)
+            inputs, targets = Variable(inputs).to('cuda'), Variable(targets).to('cuda')
             outputs = model(inputs)
             loss = criterion(outputs, targets)
     
@@ -48,8 +47,7 @@ def train(train_loader, val_loader, model, criterion, optimizer, cfgs):
         model.eval()
         results, labels = [], []
         for _, (val_inputs, val_targets) in enumerate(val_loader):
-            val_inputs, val_targets = val_inputs.cuda(), val_targets.cuda()
-            val_inputs, val_targets = Variable(val_inputs), Variable(val_targets)
+            val_inputs, val_targets = Variable(val_inputs).to('cuda'), Variable(val_targets).to('cuda')
             
             with torch.no_grad():
                 val_outputs = model(val_inputs)
