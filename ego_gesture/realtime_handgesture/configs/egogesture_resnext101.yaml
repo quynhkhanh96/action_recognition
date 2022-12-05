@@ -5,7 +5,7 @@ dataset: 'egogesture'
 n_classes: 83
 n_finetune_classes: 83
 sample_size: 112 # Height and width of inputs
-sample_duration: 32 # Temporal duration of inputs
+sample_duration: 16 # Temporal duration of inputs
 downsample: 1 # Downsampling. Selecting 1 frame out of N
 initial_scale: 1.0 # Initial scale for multiscale cropping
 n_scales: 5 # Number of scales for multiscale cropping
