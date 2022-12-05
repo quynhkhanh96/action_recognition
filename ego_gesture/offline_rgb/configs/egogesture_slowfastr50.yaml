@@ -1,7 +1,7 @@
 # local data loaders
 height: 224
 width: 224
-seq_len: 8
+seq_len: 16
 train_bz: 4
 test_bz: 8
 num_workers: 4
