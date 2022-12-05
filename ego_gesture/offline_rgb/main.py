@@ -16,7 +16,7 @@ from torch.autograd import Variable
 from mmaction.core.evaluation import top_k_accuracy
 from torch.nn.utils import clip_grad_norm_
 
-from core.base.models import build_model
+from core.models.base import build_model
 from utils import AverageMeter, seed_everything, Dict2Class
 import argparse
 import yaml
