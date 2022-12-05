@@ -16,5 +16,5 @@ epochs: 100
 loss: 'CrossEntropyLoss'
 optimizer: 'SGD'
 lr: 0.00025
-clip_gradient: 20
+clip_gradient: 40
 print_freq: 20

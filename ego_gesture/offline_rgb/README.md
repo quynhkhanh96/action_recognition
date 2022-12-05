@@ -58,9 +58,13 @@ Run the following:
 python prepare_data.py --image_dir=$IMAGE_DIR --annotation_dir=$ANN_DIR --new_data_dir=$DATA_DIR
 ```
 # **Experiments**
-Run SlowFastR50:
+Run SlowFast-R50:
 ```shell
 python main.py --data_dir=$DATA_DIR --work_dir=$DATA_DIR/cent_exps --cfg_path="configs/egogesture_slowfastr50.yaml"
+```
+Run R2plus1d-R34:
+```shell
+python main.py --data_dir=$DATA_DIR --work_dir=$DATA_DIR/cent_exps --cfg_path="configs/egogesture_r2plus1dr34.yaml"
 ```
 # **Results**
 Top1 accuracy = 81.4%, Top5 accuracy = 96.7%

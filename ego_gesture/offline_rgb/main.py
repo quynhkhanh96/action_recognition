@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import numpy as np 
 
-from mmcv.runner.checkpoint import load_checkpoint
+# from mmcv.runner.checkpoint import load_checkpoint
 
 from mmaction.datasets import build_dataset
 from torch.utils.data import DataLoader
@@ -25,7 +25,7 @@ seed_everything()
 
 def get_model(cfgs):
     model = build_model(cfgs, 'train')
-    load_checkpoint(model, cfgs.pretrained_model)
+    # load_checkpoint(model, cfgs.pretrained_model)
 
     return model
 
