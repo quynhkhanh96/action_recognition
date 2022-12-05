@@ -52,7 +52,7 @@ def get_loaders(args, cfgs):
             pipeline=train_pipeline)
 
     val_pipeline = [
-        dict(type='SampleFrames', clip_len=8, frame_interval=4, num_clips=1,
+        dict(type='SampleFrames', clip_len=cfgs.seq_len, frame_interval=4, num_clips=1,
             test_mode=True),
         dict(type='RawFrameDecode'),
         dict(type='Resize', scale=(-1, 256)),
@@ -91,7 +91,7 @@ def get_optimizer(model):
     return optimizer
 
 def train(model, train_loader, val_loader, optimizer, args, cfgs):
-    clip_gradient = 20
+    clip_gradient = 40
     model.to('cuda')
 
     best = -1

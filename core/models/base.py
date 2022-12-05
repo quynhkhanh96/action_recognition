@@ -99,7 +99,7 @@ def build_model(cfgs, mode='train'):
         model = Recognizer3D(backbone=backbone, cls_head=cls_head)
         if mode == 'train':
             load_checkpoint(model, cfgs.pretrained_model)
-    if cfgs.arch == 'slowfast_r50':
+    elif cfgs.arch == 'slowfast_r50':
         from .backbones.resnet3d_slowfast import ResNet3dSlowFast
         from .heads.slowfast_head import SlowFastHead
         backbone = ResNet3dSlowFast(pretrained=None, resample_rate=8,
@@ -115,6 +115,25 @@ def build_model(cfgs, mode='train'):
         cls_head = SlowFastHead(
             in_channels=2304, num_classes=cfgs.num_classes, 
             spatial_type='avg', dropout_ratio=0.5
+        )
+        model = Recognizer3D(backbone=backbone, cls_head=cls_head)
+        if mode == 'train':
+            load_checkpoint(model, cfgs.pretrained_model)
+    elif cfgs.arch == 'r2plus1d_r34':
+        from .backbones.resnet2plus1d import ResNet2Plus1d
+        from .heads.i3d_head import I3DHead
+        backbone = ResNet2Plus1d(depth=34, pretrained=None, pretrained2d=False,
+            norm_eval=False, conv_cfg=dict(type='Conv2plus1d'),
+            norm_cfg=dict(type='SyncBN', requires_grad=True, eps=1e-3),
+            conv1_kernel=(3, 7, 7), conv1_stride_t=1,
+            pool1_stride_t=1, inflate=(1, 1, 1, 1),
+            spatial_strides=(1, 2, 2, 2), temporal_strides=(1, 2, 2, 2),
+            zero_init_residual=False
+        )
+        cls_head = I3DHead(
+            num_classes=400, in_channels=512,
+            spatial_type='avg', dropout_ratio=0.5,
+            init_std=0.01
         )
         model = Recognizer3D(backbone=backbone, cls_head=cls_head)
         if mode == 'train':
