@@ -5,8 +5,6 @@ import torch
 import torch.nn as nn
 import numpy as np 
 
-# from mmcv.runner.checkpoint import load_checkpoint
-
 from mmaction.datasets import build_dataset
 from torch.utils.data import DataLoader
 
@@ -25,47 +23,79 @@ seed_everything()
 
 def get_model(cfgs):
     model = build_model(cfgs, 'train')
-    # load_checkpoint(model, cfgs.pretrained_model)
 
     return model
 
 def get_loaders(args, cfgs):
-    dataset_type = 'RawframeDataset'
-    img_norm_cfg = dict(
-        mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
+    if cfgs.arch.startswith('slow'):
+        dataset_type = 'RawframeDataset'
+        img_norm_cfg = dict(
+            mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
 
-    train_pipeline = [
-        dict(type='SampleFrames', clip_len=cfgs.seq_len, frame_interval=4, num_clips=1),
-        dict(type='RawFrameDecode'),
-        dict(type='Resize', scale=(-1, 256)),
-        dict(type='RandomResizedCrop'),
-        dict(type='Resize', scale=(224, 224), keep_ratio=False),
-        dict(type='Flip', flip_ratio=0.5),
-        dict(type='Normalize', **img_norm_cfg),
-        dict(type='FormatShape', input_format='NCTHW'),
-        dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
-        dict(type='ToTensor', keys=['imgs', 'label'])
-    ]
-    dst_train_cfg = dict(type=dataset_type,
-            ann_file=args.ann_file_train,
-            data_prefix=args.data_root,
-            pipeline=train_pipeline)
+        train_pipeline = [
+            dict(type='SampleFrames', clip_len=cfgs.seq_len, frame_interval=4, num_clips=1),
+            dict(type='RawFrameDecode'),
+            dict(type='Resize', scale=(-1, 256)),
+            dict(type='RandomResizedCrop'),
+            dict(type='Resize', scale=(224, 224), keep_ratio=False),
+            dict(type='Flip', flip_ratio=0.5),
+            dict(type='Normalize', **img_norm_cfg),
+            dict(type='FormatShape', input_format='NCTHW'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs', 'label'])
+        ]
+        val_pipeline = [
+            dict(type='SampleFrames', clip_len=cfgs.seq_len, frame_interval=4, num_clips=1,
+                test_mode=True),
+            dict(type='RawFrameDecode'),
+            dict(type='Resize', scale=(-1, 256)),
+            dict(type='CenterCrop', crop_size=224),
+            dict(type='Normalize', **img_norm_cfg),
+            dict(type='FormatShape', input_format='NCTHW'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs'])
+        ]
+    elif cfgs.arch.startswith('i3d'):
+        dataset_type = 'RawframeDataset'
+        img_norm_cfg = dict(
+            mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_bgr=False)
+        train_pipeline = [
+            dict(type='SampleFrames', clip_len=32, frame_interval=2, num_clips=1),
+            dict(type='RawFrameDecode'),
+            dict(type='Resize', scale=(-1, 256)),
+            dict(
+                type='MultiScaleCrop',
+                input_size=224,
+                scales=(1, 0.8),
+                random_crop=False,
+                max_wh_scale_gap=0),
+            dict(type='Resize', scale=(224, 224), keep_ratio=False),
+            dict(type='Flip', flip_ratio=0.5),
+            dict(type='Normalize', **img_norm_cfg),
+            dict(type='FormatShape', input_format='NCTHW'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs', 'label'])
+        ]
+        val_pipeline = [
+            dict(
+                type='SampleFrames',
+                clip_len=32,
+                frame_interval=2,
+                num_clips=1,
+                test_mode=True),
+            dict(type='RawFrameDecode'),
+            dict(type='Resize', scale=(-1, 256)),
+            dict(type='CenterCrop', crop_size=224),
+            dict(type='Normalize', **img_norm_cfg),
+            dict(type='FormatShape', input_format='NCTHW'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs'])
+        ]
 
-    val_pipeline = [
-        dict(type='SampleFrames', clip_len=cfgs.seq_len, frame_interval=4, num_clips=1,
-            test_mode=True),
-        dict(type='RawFrameDecode'),
-        dict(type='Resize', scale=(-1, 256)),
-        dict(type='CenterCrop', crop_size=224),
-        dict(type='Normalize', **img_norm_cfg),
-        dict(type='FormatShape', input_format='NCTHW'),
-        dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
-        dict(type='ToTensor', keys=['imgs'])
-    ]
-    dst_val_cfg = dict(type=dataset_type,
-            ann_file=args.ann_file_val,
-            data_prefix=args.data_root,
-            pipeline=val_pipeline)
+    dst_train_cfg = dict(type=dataset_type, ann_file=args.ann_file_train,
+            data_prefix=args.data_root, pipeline=train_pipeline)
+    dst_val_cfg = dict(type=dataset_type, ann_file=args.ann_file_val,
+            data_prefix=args.data_root, pipeline=val_pipeline)
 
     train_dataset = build_dataset(dst_train_cfg)
     val_dataset = build_dataset(dst_val_cfg)
@@ -91,7 +121,7 @@ def get_optimizer(model):
     return optimizer
 
 def train(model, train_loader, val_loader, optimizer, args, cfgs):
-    clip_gradient = 40
+    clip_gradient = 20
     model.to('cuda')
 
     best = -1

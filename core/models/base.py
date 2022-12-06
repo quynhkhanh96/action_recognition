@@ -131,7 +131,35 @@ def build_model(cfgs, mode='train'):
             zero_init_residual=False
         )
         cls_head = I3DHead(
-            num_classes=400, in_channels=512,
+            num_classes=cfgs.num_classes, in_channels=512,
+            spatial_type='avg', dropout_ratio=0.5,
+            init_std=0.01
+        )
+        model = Recognizer3D(backbone=backbone, cls_head=cls_head)
+        if mode == 'train':
+            load_checkpoint(model, cfgs.pretrained_model)
+    elif cfgs.arch == 'x3d_m':
+        from .backbones.x3d import X3D
+        from .heads.x3d_head import X3DHead
+        backbone = X3D(gamma_w=1, gamma_b=2.25, gamma_d=2.2)
+        cls_head = X3DHead(in_channels=432, num_classes=cfgs.num_classes,
+            spatial_type='avg', dropout_ratio=0.5,fc1_bias=False
+        )
+        model = Recognizer3D(backbone=backbone, cls_head=cls_head)
+        if mode == 'train':
+            load_checkpoint(model, cfgs.pretrained_model)
+    elif cfgs.arch == 'i3d_r50':
+        from .backbones.resnet3d import ResNet3d
+        from .heads.i3d_head import I3DHead
+        backbone = ResNet3d(pretrained='torchvision://resnet50',
+            depth=50, conv1_kernel=(5, 7, 7),
+            conv1_stride_t=2, pool1_stride_t=2,
+            conv_cfg=dict(type='Conv3d'), norm_eval=False,
+            inflate=((1, 1, 1), (1, 0, 1, 0), (1, 0, 1, 0, 1, 0), (0, 1, 0)),
+            zero_init_residual=False
+        )
+        cls_head = I3DHead(
+            num_classes=cfgs.num_classes, in_channels=2048,
             spatial_type='avg', dropout_ratio=0.5,
             init_std=0.01
         )
