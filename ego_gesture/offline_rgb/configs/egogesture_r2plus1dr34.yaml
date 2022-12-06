@@ -15,6 +15,6 @@ pretrained_model: 'https://download.openmmlab.com/mmaction/recognition/r2plus1d/
 epochs: 100
 loss: 'CrossEntropyLoss'
 optimizer: 'SGD'
-lr: 0.00025
+lr: 0.0125
 clip_gradient: 40
 print_freq: 20
