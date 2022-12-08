@@ -211,8 +211,8 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
     args.data_root = os.path.join(args.data_dir, 'rawframes')
-    args.ann_file_train = os.path.join(args.data_dir, 'train.txt')
-    args.ann_file_val = os.path.join(args.data_dir, 'test.txt')
+    args.ann_file_train = os.path.join(args.data_dir, 'egogesture_train_rawframes.txt')
+    args.ann_file_val = os.path.join(args.data_dir, 'egogesture_val_rawframes.txt')
 
     with open(args.cfg_path, 'r') as yamlfile:
         cfgs = yaml.load(yamlfile, Loader=yaml.FullLoader)
