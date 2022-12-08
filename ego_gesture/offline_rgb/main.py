@@ -55,6 +55,17 @@ def get_loaders(args, cfgs):
             dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
             dict(type='ToTensor', keys=['imgs'])
         ]
+        test_pipeline = [
+            dict(type='SampleFrames', clip_len=cfgs.seq_len, frame_interval=4,
+                num_clips=10, test_mode=True),
+            dict(type='RawFrameDecode'),
+            dict(type='Resize', scale=(-1, 256)),
+            dict(type='ThreeCrop', crop_size=256),
+            dict(type='Normalize', **img_norm_cfg),
+            dict(type='FormatShape', input_format='NCTHW'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs'])
+        ]
     elif cfgs.arch.startswith('i3d'):
         dataset_type = 'RawframeDataset'
         img_norm_cfg = dict(
@@ -91,11 +102,29 @@ def get_loaders(args, cfgs):
             dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
             dict(type='ToTensor', keys=['imgs'])
         ]
+        test_pipeline = [
+            dict(
+                type='SampleFrames',
+                clip_len=32,
+                frame_interval=2,
+                num_clips=10,
+                test_mode=True),
+            dict(type='RawFrameDecode'),
+            dict(type='Resize', scale=(-1, 256)),
+            dict(type='ThreeCrop', crop_size=256),
+            dict(type='Normalize', **img_norm_cfg),
+            dict(type='FormatShape', input_format='NCTHW'),
+            dict(type='Collect', keys=['imgs', 'label'], meta_keys=[]),
+            dict(type='ToTensor', keys=['imgs'])
+        ]
+
 
     dst_train_cfg = dict(type=dataset_type, ann_file=args.ann_file_train,
             data_prefix=args.data_root, pipeline=train_pipeline)
     dst_val_cfg = dict(type=dataset_type, ann_file=args.ann_file_val,
-            data_prefix=args.data_root, pipeline=val_pipeline)
+            data_prefix=args.data_root, 
+            pipeline=test_pipeline, # val_pipeline
+            )
 
     train_dataset = build_dataset(dst_train_cfg)
     val_dataset = build_dataset(dst_val_cfg)
